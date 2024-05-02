@@ -81,6 +81,9 @@ export class AuthenticationService {
     try {
       const authResult = await this.vaultService.get();
       if (!authResult) {
+        if(this.result) {
+          return true
+        }
         return false;
       }
       const { idToken } = authResult;

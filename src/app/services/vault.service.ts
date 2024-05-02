@@ -13,7 +13,7 @@ import { AuthResult } from '@ionic-enterprise/auth';
 })
 export class VaultService {
     config: IdentityVaultConfig = {
-        key: 'io.ionic.conferences.cs.auth1',
+        key: 'io.ionic.conferences.cs.auth4',
         type: VaultType.DeviceSecurity,
         deviceSecurityType: DeviceSecurityType.Both,
         lockAfterBackgrounded: 2000,
