@@ -13,9 +13,9 @@ import { AuthResult } from '@ionic-enterprise/auth';
 })
 export class VaultService {
     config: IdentityVaultConfig = {
-        key: 'io.ionic.conferences.cs.auth',
+        key: 'io.ionic.conferences.cs.auth1',
         type: VaultType.DeviceSecurity,
-        deviceSecurityType: DeviceSecurityType.Biometrics,
+        deviceSecurityType: DeviceSecurityType.Both,
         lockAfterBackgrounded: 2000,
         shouldClearVaultAfterTooManyFailedAttempts: false,
         customPasscodeInvalidUnlockAttempts: 10,

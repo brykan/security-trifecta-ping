@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AuthConnect, AuthResult, AzureProvider, ProviderOptions, TokenType } from '@ionic-enterprise/auth';
+import { AuthConnect, AuthResult, AzureProvider, ProviderOptions, TokenType,OktaProvider } from '@ionic-enterprise/auth';
 import { Platform } from '@ionic/angular';
 import { nativeIonicAuthOptions, webIonicAuthOptions } from '../../environments/environment';
 import { RouteService } from './route.service';
 import { VaultService } from './vault.service';
 import { checkAuthResult } from './util';
+import { PingProvider } from '../types';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
@@ -38,20 +39,13 @@ export class AuthenticationService {
         uiMode: 'current', 
         authFlow: 'PKCE' }
     });
-
-    try {
-      this.result = await this.vaultService.get();
-    } catch (error) {
-      console.error(error);
-      this.result = undefined;
-    }
   }
 
   /**
    * Login
    */
-  public async login() {
-    this.result = await AuthConnect.login(this.azureB2CProvider(), this.getAuthOptions());
+  public async login() {   
+    this.result = await AuthConnect.login(this.pingProvider(), this.getAuthOptions());
     await this.vaultService.set(this.result);
     this.routeService.goToRoot();
   }
@@ -76,7 +70,7 @@ export class AuthenticationService {
     //await checkAuthResult(this.result);
 
     try {
-      await AuthConnect.logout(this.azureB2CProvider(), this.result!);
+      await AuthConnect.logout(this.pingProvider(), this.result!);
     } catch (error) {
       console.error('AuthConnect.logout', error);
     }
@@ -96,10 +90,11 @@ export class AuthenticationService {
 
       const expired = await AuthConnect.isAccessTokenExpired(authResult);
       if (!expired) {
+        this.result = authResult
         return true;
       }
 
-      const newAuthResult = await AuthConnect.refreshSession(this.azureB2CProvider(), authResult);
+      const newAuthResult = await AuthConnect.refreshSession(this.pingProvider(), authResult);
       await this.vaultService.set(newAuthResult);
       return true;
     } catch (e) {
@@ -117,8 +112,8 @@ export class AuthenticationService {
     return AuthConnect.decodeToken(TokenType.id, this.result!);
   }
 
-  private azureB2CProvider(): AzureProvider {
-    return new AzureProvider();
+  private pingProvider() : PingProvider {
+    return new PingProvider();
   }
 
   private getAuthOptions(): ProviderOptions {

@@ -10,20 +10,17 @@ export const environment = {
 };
 
 export const nativeIonicAuthOptions: ProviderOptions = {
-  audience: 'https://audience.my-app.com',
-
-  // client or application id for provider
-  clientId: '5a5ef942-0e44-46a8-bbac-6a8ba7654eb0',
-  // the discovery url for the provider
-  // OpenID configuration
-  discoveryUrl: 'https://ioniccs.b2clogin.com/ioniccs.onmicrosoft.com/v2.0/.well-known/openid-configuration?p=B2C_1_SignUp',
-  // the URI to redirect to after log in
-  redirectUri: 'https://trifecta.nexusconcepts.com/login',
-  // requested scopes from provider
-  scope: 'openid offline_access email profile https://ioniccs.onmicrosoft.com/5a5ef942-0e44-46a8-bbac-6a8ba7654eb0/user_impersonation',
-  // the URL to redirect to after log out
-  logoutUrl: 'https://trifecta.nexusconcepts.com/login',
-};
+   audience: 'ping',
+   // Specify the client ID assigned to your application by Ping Identity
+   clientId: 'mobileAppClient',
+   // Specify the discovery URL for your Ping Identity server
+   discoveryUrl: 'https://qacommauth.penfed.org/.well-known/openid-configuration',
+   // requested scopes from provider
+   scope: 'openid',
+   // the URL to redirect to after log out
+   logoutUrl: 'com.penfed://oidc/cb/close',
+   redirectUri:'com.penfed://callback'
+  };
 
 export const webIonicAuthOptions: ProviderOptions = {
   audience: 'https://audience.my-app.com',

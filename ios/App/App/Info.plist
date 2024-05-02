@@ -25,7 +25,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>ionic.cs.appsummit</string>
+				<string>com.penfed</string>
 			</array>
 		</dict>
 	</array>

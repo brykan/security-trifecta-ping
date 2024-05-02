@@ -28,7 +28,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule)
   },
   {
-    path: 'auth-transition',
+    path: 'callback',
     loadChildren: () => import('./pages/auth-transition/auth-transition.module').then( m => m.AuthTransitionPageModule)
   }
 ];
